@@ -5,9 +5,9 @@
     <h1 class="titulo">GERENCIA APP</h1>
     <h2 class="subtitulo">Mais eficiência no controle das suas atividades!</h2>
 
-    <input class="input-form" type="text" placeholder="Informe o seu nome">
+    <input [(ngModel)]="userName"  [ngModelOptions]="{standalone:true}"  class="input-form" type="text" placeholder="Informe o seu nome">
 
-    <app-button textoBotao="Acessar" size="100"></app-button>
+    <app-button textoBotao="Acessar" size="100" (click) ="login()"></app-button>
 
   </form>
 
