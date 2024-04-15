@@ -8,6 +8,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   --primary-color: #000000;
   --error-color: #ac2828;
   --gray-color: #747474;
+  --accent-color: #FFBD59;
 
 }
 
@@ -17,3 +18,6 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .hover:hover{cursor: pointer;}
 
+.mat-mdc-progress-spinner circle{
+  stroke: var(--accent-color) !important;
+}

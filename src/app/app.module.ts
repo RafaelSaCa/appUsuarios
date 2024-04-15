@@ -10,6 +10,8 @@ import { ButtonComponent } from './components/button/button.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+
 
 @NgModule({
   declarations: [
@@ -24,7 +26,8 @@ import { LoginComponent } from './pages/login/login.component';
     AppRoutingModule,
     FormsModule,
 
-    MatIconModule
+    MatIconModule,
+    MatProgressSpinnerModule
 
 
   ],
