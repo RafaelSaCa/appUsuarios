@@ -1,0 +1,83 @@
+<app-menu></app-menu>
+<div class="container-fluid pt-3">
+
+  <div class="row mt-2">
+    <div class="col-12">
+      <h1 class="titulo">Gerenciamento de Usuários</h1>
+      <h2 class="subtitulo">Cadastre, Altere e Remova</h2>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+         <app-button class="float-end" textoBotao="Cadastrar Novo"></app-button>
+
+        <mat-form-field>
+          <mat-label>Busca por usuário. ex. nome, email, etc</mat-label>
+          <input matInput (keyup)="applyFilter($event)" placeholder="Busca por usuário. ex. nome, email, etc." #input>
+        </mat-form-field>
+
+        <table class="mat-elevation-z8"    mat-table [dataSource]="dataSource" matSort>
+
+
+          <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Id</mat-header-cell>
+            <mat-cell *matCellDef="let user"> {{user.firebaseId}} </mat-cell>
+          </ng-container>
+
+
+          <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Nome </mat-header-cell>
+            <mat-cell *matCellDef="let user"> {{user.name}}</mat-cell>
+          </ng-container>
+
+
+          <ng-container matColumnDef="email">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> E-mail </mat-header-cell>
+            <mat-cell *matCellDef="let user"> {{user.email}} </mat-cell>
+          </ng-container>
+
+
+          <ng-container matColumnDef="role">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Cargo </mat-header-cell>
+            <mat-cell *matCellDef="let user"> {{user.role}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="benefits">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Benefícios </mat-header-cell>
+            <mat-cell *matCellDef="let user">
+
+              @if (user.healthPlan || user.dentalPlan) {
+                <mat-icon class="cor-primary" style="margin-left: 35px;">check</mat-icon>
+              }
+              @if ( !user.healthPlan && !user.dentalPlan  ) {
+                <mat-icon class="cor-error" style="margin-left: 35px;">remove</mat-icon>
+              }
+
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="action">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Detalhes  Edite  Remova  </mat-header-cell>
+            <mat-cell *matCellDef="let user">
+              <mat-icon class="icone-tabela" >visibility</mat-icon>
+              <mat-icon class="icone-tabela" >edit</mat-icon>
+              <mat-icon class="icone-tabela-delete" >delete</mat-icon>
+            </mat-cell>
+          </ng-container>
+
+
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let user; columns: displayedColumns;"></mat-row>
+
+          <tr  *matNoDataRow>
+            <td  class="no-data"  colspan="4">Não foram encontrados dados para a pesquisa: "{{input.value}}"</td>
+          </tr>
+        </table>
+
+        <mat-paginator class="shadow-sm"  [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Selecione usuários por página"></mat-paginator>
+
+    </div>
+  </div>
+</div>

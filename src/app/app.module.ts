@@ -13,6 +13,11 @@ import { LoginComponent } from './pages/login/login.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {AngularFireModule} from '@angular/fire/compat';
 import { environment } from '../environments/environment.development';
+import { CrudComponent } from './pages/crud/crud.component';
+import {MatTableModule} from '@angular/material/table';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -20,7 +25,8 @@ import { environment } from '../environments/environment.development';
     ButtonComponent,
     LoginComponent,
     HomeComponent,
-    MenuComponent
+    MenuComponent,
+    CrudComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +35,11 @@ import { environment } from '../environments/environment.development';
     AngularFireModule.initializeApp(environment.firebaseConfig),
 
     MatIconModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatTableModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatPaginatorModule
 
 
 
