@@ -5,6 +5,8 @@ import { MatSort } from '@angular/material/sort';
 import { User } from '../../interfaces/user';
 import { MatTableDataSource } from '@angular/material/table';
 import { DataSource } from '@angular/cdk/collections';
+import { MatDialog } from '@angular/material/dialog';
+import { ModalViewUserComponent } from './modal-view-user/modal-view-user.component';
 
 @Component({
   selector: 'app-crud',
@@ -21,7 +23,7 @@ export class CrudComponent {
   @ViewChild(MatSort) sort: MatSort;
 
 
-  constructor( private service : UsersService){
+  constructor( private service : UsersService, private dialog : MatDialog){
     this.dataSource = new MatTableDataSource<any>(this.listUsers);
   }
 
@@ -59,4 +61,17 @@ export class CrudComponent {
       this.dataSource.paginator.firstPage();
     }
   }
+
+ //modal
+ openModalViewUser( user: User){
+  this.dialog.open(ModalViewUserComponent, {
+    width: '750px',
+    height: '350px',
+    data: user
+  })
+
+ }
+
+
+
 }

@@ -60,7 +60,7 @@
           <ng-container matColumnDef="action">
             <mat-header-cell *matHeaderCellDef mat-sort-header>Detalhes  Edite  Remova  </mat-header-cell>
             <mat-cell *matCellDef="let user">
-              <mat-icon class="icone-tabela" >visibility</mat-icon>
+              <mat-icon class="icone-tabela" (click)="openModalViewUser( user)" >visibility</mat-icon>
               <mat-icon class="icone-tabela" >edit</mat-icon>
               <mat-icon class="icone-tabela-delete" >delete</mat-icon>
             </mat-cell>
