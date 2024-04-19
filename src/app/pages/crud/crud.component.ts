@@ -1,11 +1,11 @@
 import { Component, ViewChild } from '@angular/core';
-import { UsersService } from '../../services/users.service';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { User } from '../../interfaces/user';
 import { MatTableDataSource } from '@angular/material/table';
-import { DataSource } from '@angular/cdk/collections';
-import { MatDialog } from '@angular/material/dialog';
+import { User } from '../../interfaces/user';
+import { UsersService } from '../../services/users.service';
+import { ModalFormUserComponent } from './modal-form-user/modal-form-user.component';
 import { ModalViewUserComponent } from './modal-view-user/modal-view-user.component';
 
 @Component({
@@ -45,6 +45,7 @@ export class CrudComponent {
         this.dataSource = new MatTableDataSource<any>(this.listUsers);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
+        this.paginator._intl.itemsPerPageLabel="Usuários por página"
 
       },
       error: (erro) =>{
@@ -70,6 +71,13 @@ export class CrudComponent {
     data: user
   })
 
+ }
+
+ openModelAddUser(){
+  this.dialog.open(ModalFormUserComponent,{
+    width:'800px',
+    height:'450px',
+  }).afterClosed().subscribe( () => this.getListUsers());
  }
 
 

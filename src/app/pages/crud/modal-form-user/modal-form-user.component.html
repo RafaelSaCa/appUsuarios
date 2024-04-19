@@ -1,0 +1,75 @@
+<div class="container-fluid p-3">
+  <mat-icon class="float-end hover" (click)="closeModal()">close</mat-icon>
+
+  <h1 class="titulo">Gerenciamento de Usuário</h1>
+  <h2 class="subtitulo">Informe os dados para cadastrar</h2>
+   <hr>
+
+    <form class="row" [formGroup]="formUser">
+      <div class="col-12 col-md-6 mb-2">
+        <mat-form-field class="example-full-width w-100">
+          <mat-label>Nome</mat-label>
+          <input type="text" matInput formControlName="name"  placeholder="Informe o nome do usuário">
+            @if ( formUser.controls['name'].invalid) {
+            <mat-error>Mínimo 3 caracteres!</mat-error>
+          }
+          </mat-form-field>
+      </div>
+      <div class="col-12 col-md-6 mb-2">
+        <mat-form-field class="example-full-width w-100">
+          <mat-label>E-mail</mat-label>
+          <input type="email" matInput formControlName="email"  placeholder="Informe o e-mail">
+            @if ( formUser.controls['email'].invalid) {
+            <mat-error>Informe um e-mail válido!</mat-error>
+          }
+          </mat-form-field>
+      </div>
+      <div class="col-12 col-md-6 mb-2">
+        <mat-form-field class="example-full-width w-100">
+          <mat-label>Setor</mat-label>
+          <input type="text" matInput formControlName="sector"  placeholder="Informe o setor">
+            @if ( formUser.controls['sector'].invalid) {
+            <mat-error>Mínimo 5 caracteres!</mat-error>
+          }
+          </mat-form-field>
+      </div>
+      <div class="col-12 col-md-6 mb-2">
+        <mat-form-field class="example-full-width w-100">
+          <mat-label>Cargo</mat-label>
+          <input type="text" matInput formControlName="role"  placeholder="Informe o cargo">
+            @if ( formUser.controls['role'].invalid) {
+            <mat-error>Mínimo 5 caracteres!</mat-error>
+          }
+         </mat-form-field>
+      </div>
+
+      <div class="col-12 col-md-6 mb-2">
+        <mat-form-field class="w-100">
+          <mat-label>Plano de Saúde</mat-label>
+
+          <mat-select formControlName="healthPlan">
+            @for (plano of planoSaude; track plano) {
+              <mat-option [value]="plano.descricao">{{plano.descricao}}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="col-12 col-md-6 mb-2">
+        <mat-form-field class="w-100">
+          <mat-label> Plano Odontológico</mat-label>
+
+          <mat-select formControlName="healthPlan">
+            @for (plano of planoOndonto; track plano) {
+              <mat-option [value]="plano.descricao">{{plano.descricao}}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="col-12">
+        <button class="botao-primario float-end" [disabled]="!formUser.valid" (click)="saveUser()">Salvar</button>
+      </div>
+
+    </form>
+</div>

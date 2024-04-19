@@ -1,26 +1,29 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { FormsModule } from '@angular/forms';
+import { AngularFireModule } from '@angular/fire/compat';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatCardModule } from '@angular/material/card';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSelectModule } from '@angular/material/select';
+import { MatTableModule } from '@angular/material/table';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { environment } from '../environments/environment.development';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ButtonComponent } from './components/button/button.component';
 import { MenuComponent } from './components/menu/menu.component';
+import { CrudComponent } from './pages/crud/crud.component';
+import { ModalFormUserComponent } from './pages/crud/modal-form-user/modal-form-user.component';
+import { ModalViewUserComponent } from './pages/crud/modal-view-user/modal-view-user.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {AngularFireModule} from '@angular/fire/compat';
-import { environment } from '../environments/environment.development';
-import { CrudComponent } from './pages/crud/crud.component';
-import {MatTableModule} from '@angular/material/table';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
-import {MatPaginatorModule} from '@angular/material/paginator';
-import { ModalViewUserComponent } from './pages/crud/modal-view-user/modal-view-user.component';
-import {MatDialogModule} from '@angular/material/dialog';
-import {MatCardModule} from '@angular/material/card';
+
 
 @NgModule({
   declarations: [
@@ -30,12 +33,15 @@ import {MatCardModule} from '@angular/material/card';
     HomeComponent,
     MenuComponent,
     CrudComponent,
-    ModalViewUserComponent
+    ModalViewUserComponent,
+    ModalFormUserComponent,
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
 
     MatIconModule,
@@ -45,14 +51,11 @@ import {MatCardModule} from '@angular/material/card';
     MatInputModule,
     MatPaginatorModule,
     MatDialogModule,
-    MatCardModule
-
-
+    MatCardModule,
+    MatSelectModule
 
   ],
-  providers: [
-    provideAnimationsAsync()
-  ],
-  bootstrap: [AppComponent]
+  providers: [provideAnimationsAsync()],
+  bootstrap: [AppComponent],
 })
 export class AppModule {}
