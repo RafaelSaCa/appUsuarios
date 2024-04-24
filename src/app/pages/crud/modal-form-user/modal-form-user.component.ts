@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { ToastrService } from 'ngx-toastr';
 import { User } from '../../../interfaces/user';
 import { UsersService } from '../../../services/users.service';
 
@@ -23,7 +24,7 @@ export class ModalFormUserComponent {
     {
       id: 3,
       descricao: 'Plano 500 plus'
-    }
+    },
   ];
 
   planoOndonto = [
@@ -39,29 +40,51 @@ export class ModalFormUserComponent {
       id: 3,
       descricao: 'Plano Plus'
     }
+
   ];
 
   formUser : FormGroup;
+  editUser: boolean = false;
 
   constructor( private formBuilder : FormBuilder,
-                           private service: UsersService,
-                           public dialoRef: MatDialogRef<ModalFormUserComponent>){}
+                      private service: UsersService,
+                      private toastr: ToastrService,
+                      @Inject(MAT_DIALOG_DATA) public data: any,
+                      public dialoRef: MatDialogRef<ModalFormUserComponent>){}
 
   ngOnInit(){
     this.buildForm();
+    if( this.data && this.data.name){
+      this.editUser = true;
+    }
   }
 
   saveUser(){
     const userForm : User =  this.formUser.getRawValue();
-    this.service.create(userForm).then(
-      (response: any) =>{
-        window.alert('Salvo com sucesso!');
-        this.closeModal();
-      })
-     .catch( erro =>{
-      window.alert('Ocorreu um erro ao cadastrar o usuário.');
-      console.error(erro);
-     });
+//editar
+    if( this.data && this.data.name){
+
+      this.service.update(this.data.firebaseId, userForm).then(
+        (response: any) =>{
+          this.onSuccess(),
+           this.closeModal();
+        })
+       .catch( erro =>{
+         this.toastr.error('Ocorreu um erro ao salvar os dados!');
+       });
+
+    }else{
+//cadastrar
+      this.service.create(userForm).then(
+        (response: any) =>{
+          this.onSuccess(),
+           this.closeModal();
+        })
+       .catch( erro =>{
+          this.toastr.error('Ocorreu um erro ao salvar os dados!');
+       });
+    }
+
   }
 
   buildForm(){
@@ -74,10 +97,29 @@ export class ModalFormUserComponent {
         healthPlan: [''],
         dentalPlan: [''],
     });
+    if (this.data && this.data.name){
+      this.preencheForm();
+    }
   }
 
+  preencheForm(){
+    this.formUser.patchValue({
+      name: this.data.name,
+      email: this.data.email,
+      sector: this.data.sector,
+      role: this.data.role,
+      healthPlan: this.data.healthPlan,
+      dentalPlan: this.data.dentalPlan,
+    });
+  }
 
   closeModal(){
     this.dialoRef.close();
   }
-}
+
+  onSuccess(){
+    this.toastr.success("Dados Salvos com sucesso!")
+    };
+
+
+  }

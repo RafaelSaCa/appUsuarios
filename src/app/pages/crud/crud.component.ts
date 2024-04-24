@@ -7,6 +7,7 @@ import { User } from '../../interfaces/user';
 import { UsersService } from '../../services/users.service';
 import { ModalFormUserComponent } from './modal-form-user/modal-form-user.component';
 import { ModalViewUserComponent } from './modal-view-user/modal-view-user.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-crud',
@@ -23,7 +24,9 @@ export class CrudComponent {
   @ViewChild(MatSort) sort: MatSort;
 
 
-  constructor( private service : UsersService, private dialog : MatDialog){
+  constructor( private service : UsersService,
+                           private dialog : MatDialog){
+
     this.dataSource = new MatTableDataSource<any>(this.listUsers);
   }
 
@@ -63,7 +66,7 @@ export class CrudComponent {
     }
   }
 
- //modal
+
  openModalViewUser( user: User){
   this.dialog.open(ModalViewUserComponent, {
     width: '750px',
@@ -73,13 +76,21 @@ export class CrudComponent {
 
  }
 
- openModelAddUser(){
+ openModalAddUser(){
   this.dialog.open(ModalFormUserComponent,{
     width:'800px',
     height:'450px',
-  }).afterClosed().subscribe( () => this.getListUsers());
+  }).afterClosed().subscribe( () =>
+     this.getListUsers());
  }
 
-
+openModalEditUser( user : User){
+  this.dialog.open(ModalFormUserComponent,{
+    width:'800px',
+    height:'450px',
+    data: user
+  }).afterClosed().subscribe( () =>
+     this.getListUsers());
+}
 
 }

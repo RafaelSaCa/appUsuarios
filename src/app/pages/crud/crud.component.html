@@ -10,7 +10,7 @@
 
   <div class="row">
     <div class="col-12">
-         <app-button class="float-end" textoBotao="Cadastrar Novo" (click)="openModelAddUser()"></app-button>
+         <app-button class="float-end" textoBotao="Cadastrar Novo" (click)="openModalAddUser()"></app-button>
 
         <mat-form-field>
           <mat-label>Busca por usuário. ex. nome, email, etc</mat-label>
@@ -61,7 +61,7 @@
             <mat-header-cell *matHeaderCellDef mat-sort-header>Detalhes  Edite  Remova  </mat-header-cell>
             <mat-cell *matCellDef="let user">
               <mat-icon class="icone-tabela" (click)="openModalViewUser( user)" >visibility</mat-icon>
-              <mat-icon class="icone-tabela" >edit</mat-icon>
+              <mat-icon class="icone-tabela" (click)="openModalEditUser(user)">edit</mat-icon>
               <mat-icon class="icone-tabela-delete" >delete</mat-icon>
             </mat-cell>
           </ng-container>

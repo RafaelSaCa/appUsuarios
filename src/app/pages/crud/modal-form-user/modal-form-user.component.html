@@ -1,8 +1,13 @@
 <div class="container-fluid p-3">
   <mat-icon class="float-end hover" (click)="closeModal()">close</mat-icon>
 
-  <h1 class="titulo">Gerenciamento de Usuário</h1>
-  <h2 class="subtitulo">Informe os dados para cadastrar</h2>
+  @if (editUser){
+    <h1 class="titulo">Editar dados do Usuário</h1>
+    <h2 class="subtitulo">Informe os dados para editar</h2>
+  }@else{
+      <h1 class="titulo">Cadastrar Usuário</h1>
+    <h2 class="subtitulo">Informe os dados para cadastrar</h2>
+  }
    <hr>
 
     <form class="row" [formGroup]="formUser">
@@ -48,7 +53,7 @@
           <mat-label>Plano de Saúde</mat-label>
 
           <mat-select formControlName="healthPlan">
-            @for (plano of planoSaude; track plano) {
+                @for (plano of planoSaude; track plano) {
               <mat-option [value]="plano.descricao">{{plano.descricao}}</mat-option>
             }
           </mat-select>
@@ -59,8 +64,8 @@
         <mat-form-field class="w-100">
           <mat-label> Plano Odontológico</mat-label>
 
-          <mat-select formControlName="healthPlan">
-            @for (plano of planoOndonto; track plano) {
+          <mat-select formControlName="dentalPlan">
+              @for (plano of planoOndonto; track plano) {
               <mat-option [value]="plano.descricao">{{plano.descricao}}</mat-option>
             }
           </mat-select>
