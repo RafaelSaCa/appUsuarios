@@ -13,6 +13,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { ToastrModule } from 'ngx-toastr';
 import { environment } from '../environments/environment.development';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,7 +24,6 @@ import { ModalFormUserComponent } from './pages/crud/modal-form-user/modal-form-
 import { ModalViewUserComponent } from './pages/crud/modal-view-user/modal-view-user.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
-import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
@@ -47,7 +47,7 @@ import { ToastrModule } from 'ngx-toastr';
     AngularFireModule.initializeApp(environment.firebaseConfig),
 
     ToastrModule.forRoot({
-      timeOut: 5000,
+      timeOut: 6000,
       positionClass: 'toast-top-right',
       progressBar: true
     }),

@@ -25,7 +25,8 @@ export class CrudComponent {
 
 
   constructor( private service : UsersService,
-                           private dialog : MatDialog){
+                      private toastr: ToastrService,
+                      private dialog : MatDialog){
 
     this.dataSource = new MatTableDataSource<any>(this.listUsers);
   }
@@ -55,6 +56,18 @@ export class CrudComponent {
         console.log(erro);
       }
     });
+  }
+
+  deleteUser( firebaseId: string ){
+    this.service.delete(firebaseId).then(
+      (response: any) =>{
+        this.toastr.success('Cadastro de usuário excluido com sucesso!')
+      }
+    )
+    .catch( erro =>{
+      this.toastr.error('Ocorreu um erro ao excluir os dados!');
+   });
+
   }
 
   applyFilter(event: Event) {
@@ -92,5 +105,7 @@ openModalEditUser( user : User){
   }).afterClosed().subscribe( () =>
      this.getListUsers());
 }
+
+
 
 }
