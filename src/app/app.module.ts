@@ -23,6 +23,7 @@ import { ModalFormUserComponent } from './pages/crud/modal-form-user/modal-form-
 import { ModalViewUserComponent } from './pages/crud/modal-view-user/modal-view-user.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
+import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import { LoginComponent } from './pages/login/login.component';
     ModalViewUserComponent,
     ModalFormUserComponent,
 
+
   ],
   imports: [
     BrowserModule,
@@ -43,6 +45,12 @@ import { LoginComponent } from './pages/login/login.component';
     FormsModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
+
+    ToastrModule.forRoot({
+      timeOut: 5000,
+      positionClass: 'toast-top-right',
+      progressBar: true
+    }),
 
     MatIconModule,
     MatProgressSpinnerModule,
